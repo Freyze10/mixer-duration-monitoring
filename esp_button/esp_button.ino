@@ -37,12 +37,6 @@ void setup() {
   pinMode(button1, INPUT_PULLUP);
   pinMode(button2, INPUT_PULLUP);
 
-  // Initialize OLED
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    Serial.println("SSD1306 allocation failed");
-    for (;;);
-  }
-
   header();
   display.display();
 
@@ -50,7 +44,7 @@ void setup() {
   displayMessage("Connecting to WiFi");
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
-    delay(200);
+    delay(500);
     Serial.print(".");
   }
   Serial.println("\nWiFi connected!");
@@ -153,7 +147,7 @@ void displayEnd() {
   display.setCursor(10, 20);
   display.println("Total Usage:");
   display.setTextSize(2);
-  display.setCursor(13, 35);
+  display.setCursor(16, 35);
   char durationStr[20];
   sprintf(durationStr, "%02d:%02d:%02d", hours, minutes, secs);
   display.println(durationStr);
