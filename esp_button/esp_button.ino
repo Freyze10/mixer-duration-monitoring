@@ -85,7 +85,7 @@ void header() {
   display.setCursor(0, 30);
   display.println("---------------------");
   display.setTextSize(1);
-  display.setCursor(24, 45);
+  display.setCursor(28, 45);
   display.println("Press Start!");
 }
 
