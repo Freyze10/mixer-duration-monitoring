@@ -37,11 +37,18 @@ void setup() {
   pinMode(button1, INPUT_PULLUP);
   pinMode(button2, INPUT_PULLUP);
 
-  header();
-  display.display();
+  // Initialize OLED
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println("SSD1306 allocation failed");
+    for (;;);
+  }
+
+  // header();
+  // display.display();
+  // delay(1000);
 
   // Connect to Wi-Fi
-  displayMessage("Connecting to WiFi");
+  displayMessage("Connecting to WiFi...");
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -52,7 +59,7 @@ void setup() {
   // Sync NTP time
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   displayMessage("Getting time...");
-  delay(800);
+  delay(1000);
 
   struct tm timeinfo;
   if (!getLocalTime(&timeinfo)) {
@@ -61,7 +68,7 @@ void setup() {
     return;
   }
   displayMessage("Time synced!");
-  delay(1000);
+  delay(1500);
 
   header();
   display.display();
@@ -77,6 +84,9 @@ void header() {
   display.println("Philippines, INC.");
   display.setCursor(0, 30);
   display.println("---------------------");
+  display.setTextSize(1);
+  display.setCursor(24, 45);
+  display.println("Press Start!");
 }
 
 void displayMessage(String msg) {
