@@ -48,7 +48,7 @@ void setup() {
   // delay(1000);
 
   // Connect to Wi-Fi
-  displayMessage("Connecting to WiFi...");
+  displayMessage("Connecting to WiFi");
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
